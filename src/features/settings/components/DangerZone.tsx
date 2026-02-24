@@ -1,4 +1,9 @@
+import { DeleteOrganizationModal } from "@/components/ui/modal/DeleteOrganizationModal";
+import { useState } from "react";
+
 export function DangerZone() {
+  const [openDeleteOrg, setOpenDeleteOrg] = useState(false);
+  const [loadingDeleteOrg, setLoadingDeleteOrg] = useState(false);
   return (
     <section className="mt-20 pt-10 border-t-2 border-dashed border-red-200">
 
@@ -16,12 +21,29 @@ export function DangerZone() {
           Deactivate Account
         </button>
 
-        <button className="px-5 py-2.5 rounded-lg bg-red-600 text-white font-bold text-sm">
+        <button onClick={() => setOpenDeleteOrg(true)} className="px-5 py-2.5 rounded-lg bg-red-600 text-white font-bold text-sm">
           Delete Organization
         </button>
+    <DeleteOrganizationModal
+      open={openDeleteOrg}
+      organizationName="Neturai"
+      loading={loadingDeleteOrg}
+      onClose={() => setOpenDeleteOrg(false)}
+      onConfirm={async () => {
+        setLoadingDeleteOrg(true);
 
+        await new Promise((res) => setTimeout(res, 1500));
+
+        setLoadingDeleteOrg(false);
+        setOpenDeleteOrg(false);
+      }}
+    />
       </div>
 
     </section>
+
+    
   );
+
+  
 }

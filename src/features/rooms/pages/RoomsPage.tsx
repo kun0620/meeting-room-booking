@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ConfirmModal } from "@/components/ui/modal/ConfirmModal";
+import { AddRoomModal } from "@/components/ui/modal/AddRoomModal";
 
 type Room = {
   id: string;
@@ -11,6 +13,11 @@ type Room = {
 };
 
 export default function RoomsPage() {
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [rooms, setRooms] = useState<Room[]>([
     {
       id: "1",
@@ -50,6 +57,46 @@ export default function RoomsPage() {
     );
   };
 
+  const handleBook = (room: Room) => {
+    setSelectedRoom(room);
+    setOpenConfirm(true);
+  };
+
+  const confirmBooking = async () => {
+    if (!selectedRoom) return;
+
+    setLoading(true);
+
+    // simulate API
+    await new Promise((res) => setTimeout(res, 1200));
+
+    console.log("Booked:", selectedRoom.name);
+
+    setLoading(false);
+    setOpenConfirm(false);
+    setSelectedRoom(null);
+  };
+
+  const handleAddRoom = async (newRoom: {
+    name: string;
+    capacity: number;
+    location: string;
+    amenities: string[];
+    isActive: boolean;
+    }) => {
+    const room: Room = {
+        id: crypto.randomUUID(),
+        name: newRoom.name,
+        capacity: newRoom.capacity,
+        location: newRoom.location,
+        image:
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200",
+        isActive: newRoom.isActive,
+    };
+
+    setRooms((prev) => [...prev, room]);
+    };
+
   return (
     <div className="p-8 overflow-y-auto">
 
@@ -65,17 +112,20 @@ export default function RoomsPage() {
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
         {rooms.map((room) => (
           <RoomCard
             key={room.id}
             room={room}
             onToggle={() => toggleRoom(room.id)}
+            onBook={() => handleBook(room)}
           />
         ))}
 
         {/* Add New Card */}
-        <button className="border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center p-8 gap-4 hover:bg-white hover:border-primary/40 transition-all group">
+        <button
+        onClick={() => setOpenAddModal(true)}
+        className="border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center p-8 gap-4 hover:bg-white hover:border-primary/40 transition-all group"
+        >
           <div className="h-12 w-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-all">
             <span className="material-symbols-outlined !text-3xl">
               add
@@ -90,24 +140,44 @@ export default function RoomsPage() {
             </p>
           </div>
         </button>
-
       </div>
+
+      {/* Confirm Modal */}
+      <ConfirmModal
+        open={openConfirm}
+        title="Confirm Booking"
+        description={
+          selectedRoom
+            ? `Are you sure you want to book ${selectedRoom.name}?`
+            : ""
+        }
+        loading={loading}
+        onConfirm={confirmBooking}
+        onClose={() => {
+          setOpenConfirm(false);
+          setSelectedRoom(null);
+        }}
+      />
+
+      <AddRoomModal
+        open={openAddModal}
+        onClose={() => setOpenAddModal(false)}
+        onSave={handleAddRoom}
+        />
+
     </div>
   );
+}
 
-  type CardProps = {
-  room: {
-    name: string;
-    capacity: number;
-    location: string;
-    image: string;
-    isActive: boolean;
-    premium?: boolean;
-  };
+/* ---------------- Room Card ---------------- */
+
+type CardProps = {
+  room: Room;
   onToggle: () => void;
+  onBook: () => void;
 };
 
-function RoomCard({ room, onToggle }: CardProps) {
+function RoomCard({ room, onToggle, onBook }: CardProps) {
   return (
     <div
       className={`bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group flex flex-col ${
@@ -155,9 +225,12 @@ function RoomCard({ room, onToggle }: CardProps) {
 
         {/* Footer */}
         <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-            Active Status
-          </span>
+          <button
+            onClick={onBook}
+            className="text-sm font-semibold text-primary hover:underline"
+          >
+            Book
+          </button>
 
           <label className="relative inline-flex items-center cursor-pointer">
             <input
@@ -173,5 +246,4 @@ function RoomCard({ room, onToggle }: CardProps) {
       </div>
     </div>
   );
-}
 }

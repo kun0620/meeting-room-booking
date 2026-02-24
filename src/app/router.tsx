@@ -6,20 +6,22 @@ import RoomsPage from "@/features/rooms/pages/RoomsPage";
 import MyBookingsPage from "@/features/bookings/pages/MyBookingsPage";
 import CalendarPage from "@/features/calendar/pages/CalendarPage";
 import SettingsPage from "@/features/settings/pages/SettingsPage";
+import LandingPage from "@/pages/LandingPage";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,   // ✅ หน้าแรกจริง
+  },
   {
     path: "/login",
     element: <LoginPage />,
   },
   {
-    path: "/",
-    element: <AppLayout />,   // 👈 ต้องมีตัวนี้
+    path: "/app",
+    element: <AppLayout />,
     children: [
-      {
-        index: true,
-        element: <DashboardPage />,
-      },
+      { index: true, element: <DashboardPage /> },
       { path: "rooms", element: <RoomsPage /> },
       { path: "bookings", element: <MyBookingsPage /> },
       { path: "calendar", element: <CalendarPage /> },
