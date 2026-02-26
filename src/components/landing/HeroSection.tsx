@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function HeroSection() {
   return (
     <section className="flex flex-col items-center gap-12 px-6 py-16 lg:flex-row lg:px-40 lg:py-24">
@@ -19,9 +21,12 @@ export function HeroSection() {
         </p>
 
         <div className="flex flex-wrap gap-4">
-          <button className="h-14 min-w-[160px] rounded-xl bg-primary px-8 font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all">
+          <Link
+            to="/login"
+            className="flex items-center justify-center h-14 min-w-[160px] rounded-xl bg-primary px-8 font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all decoration-transparent"
+          >
             Start Free
-          </button>
+          </Link>
 
           <button className="h-14 min-w-[160px] rounded-xl border-2 border-primary/20 px-8 font-bold text-primary hover:bg-primary/5">
             Book Demo

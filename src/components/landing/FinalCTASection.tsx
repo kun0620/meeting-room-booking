@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function FinalCTASection() {
   return (
     <section className="mb-24 px-6 text-center lg:px-40">
@@ -12,9 +14,12 @@ export function FinalCTASection() {
         </p>
 
         <div className="flex justify-center gap-4 mt-8">
-          <button className="h-14 rounded-xl bg-white px-10 font-bold text-primary">
+          <Link
+            to="/login"
+            className="flex items-center justify-center h-14 rounded-xl bg-white px-10 font-bold text-primary decoration-transparent"
+          >
             Get Started Now
-          </button>
+          </Link>
           <button className="h-14 rounded-xl border-2 border-white/30 px-10 font-bold text-white">
             Talk to Sales
           </button>

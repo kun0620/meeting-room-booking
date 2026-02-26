@@ -1,212 +1,145 @@
-import { useState } from "react";
-import { DangerModal } from "@/components/ui/modal/DangerModal";
-import { CreateBookingModal } from "@/components/ui/modal/CreateBookingModal";
-import type { BookingFormData } from "@/components/ui/modal/CreateBookingModal";
-type Booking = {
-  id: string;
-  room: string;
-  title: string;
-  date: string;
-  time: string;
-  status: "confirmed" | "upcoming";
-};
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { getMyBookings, cancelBooking } from "../services/bookings.service";
+import type { Booking } from "../services/bookings.service";
 
 export default function MyBookingsPage() {
+  const queryClient = useQueryClient();
 
-  const [openCreate, setOpenCreate] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
-  const [loadingDelete, setLoadingDelete] = useState(false);
+  // ─── Data Fetching ────────────────────────────────────────────────
+  const { data: bookings = [], isLoading } = useQuery({
+    queryKey: ["my-bookings"],
+    queryFn: getMyBookings,
+  });
 
-  const [selectedBooking, setSelectedBooking] =
-    useState<Booking | null>(null);
-
-  // 🔥 แก้ตรงนี้ (เพิ่ม setBookings)
-  const [bookings, setBookings] = useState<Booking[]>([
-    {
-      id: "1",
-      room: "Conference Room A",
-      title: "Quarterly Sprint Planning",
-      date: "Oct 24, 2023",
-      time: "10:00 AM - 11:30 AM",
-      status: "confirmed",
+  // ─── Mutations ────────────────────────────────────────────────────
+  const cancelMutation = useMutation({
+    mutationFn: cancelBooking,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["my-bookings"] });
     },
-    {
-      id: "2",
-      room: "Meeting Room 2",
-      title: "Design System Review",
-      date: "Oct 25, 2023",
-      time: "02:00 PM - 03:00 PM",
-      status: "upcoming",
-    },
-  ]);
+  });
 
-  return (
-    <div className="p-8">
+  const handleCancel = (id: string) => {
+    if (confirm("Are you sure you want to cancel this booking?")) {
+      cancelMutation.mutate(id);
+    }
+  };
 
-      {/* ================= HEADER ================= */}
-
-      <div className="flex justify-between items-end mb-8">
-        <div>
-          <h2 className="text-3xl font-black tracking-tight">
-            My Bookings
-          </h2>
-          <p className="text-slate-500 mt-1">
-            Manage and track your upcoming room reservations.
-          </p>
-        </div>
-
-        {/* 🔥 เพิ่มปุ่มตรงนี้ */}
-        <button
-          onClick={() => setOpenCreate(true)}
-          className="px-5 py-2.5 bg-primary text-white rounded-lg text-sm font-semibold shadow-lg shadow-primary/20 hover:brightness-110 transition-all flex items-center gap-2"
-        >
-          <span className="material-symbols-outlined text-sm">
-            add
-          </span>
-          Book Room
-        </button>
-      </div>
-
-      {/* ================= TABLE ================= */}
-
-      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-slate-50 border-b border-slate-200">
-                <th className="px-6 py-4 text-xs font-bold uppercase text-slate-500">
-                  Room
-                </th>
-                <th className="px-6 py-4 text-xs font-bold uppercase text-slate-500">
-                  Title
-                </th>
-                <th className="px-6 py-4 text-xs font-bold uppercase text-slate-500">
-                  Date
-                </th>
-                <th className="px-6 py-4 text-xs font-bold uppercase text-slate-500">
-                  Time
-                </th>
-                <th className="px-6 py-4 text-xs font-bold uppercase text-slate-500">
-                  Status
-                </th>
-                <th className="px-6 py-4 text-xs font-bold uppercase text-slate-500 text-right">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-
-            <tbody className="divide-y divide-slate-100">
-              {bookings.map((b) => (
-                <tr key={b.id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4 text-sm font-semibold">
-                    {b.room}
-                  </td>
-
-                  <td className="px-6 py-4 text-sm text-slate-600">
-                    {b.title}
-                  </td>
-
-                  <td className="px-6 py-4 text-sm text-slate-600">
-                    {b.date}
-                  </td>
-
-                  <td className="px-6 py-4 text-sm text-slate-600">
-                    {b.time}
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <StatusBadge status={b.status} />
-                  </td>
-
-                  <td className="px-6 py-4 text-right">
-                    <button
-                      onClick={() => {
-                        setSelectedBooking(b);
-                        setOpenDelete(true);
-                      }}
-                      className="p-1.5 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
-                    >
-                      <span className="material-symbols-outlined text-lg">
-                        close
-                      </span>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* ================= CREATE MODAL ================= */}
-
-      <CreateBookingModal
-        open={openCreate}
-        onClose={() => setOpenCreate(false)}
-        onSubmit={(data: BookingFormData) => {
-          // 🔥 เพิ่ม booking เข้า table จริง
-
-          const newBooking: Booking = {
-            id: Date.now().toString(),
-            room: data.room,
-            title: data.title,
-            date: data.date,
-            time: `${data.startTime} - ${data.endTime}`,
-            status: "upcoming",
-          };
-
-          setBookings((prev) => [newBooking, ...prev]);
-        }}
-      />
-
-      {/* ================= DELETE MODAL ================= */}
-
-      <DangerModal
-        open={openDelete}
-        title="Delete Booking"
-        description="This action cannot be undone."
-        reference={selectedBooking?.title}
-        loading={loadingDelete}
-        onClose={() => setOpenDelete(false)}
-        onConfirm={async () => {
-
-          if (!selectedBooking) return;
-
-          setLoadingDelete(true);
-
-          // 🔥 ลบจริง
-          setBookings((prev) =>
-            prev.filter((b) => b.id !== selectedBooking.id)
-          );
-
-          await new Promise((res) => setTimeout(res, 600));
-
-          setLoadingDelete(false);
-          setOpenDelete(false);
-          setSelectedBooking(null);
-        }}
-      />
-
-    </div>
-  );
-}
-
-/* ========================= */
-/* Status Badge              */
-/* ========================= */
-
-function StatusBadge({ status }: { status: "confirmed" | "upcoming" }) {
-  if (status === "confirmed") {
+  if (isLoading) {
     return (
-      <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 border border-emerald-200">
-        Confirmed
-      </span>
+      <div className="p-8 flex items-center justify-center min-h-[400px]">
+        <span className="material-symbols-outlined animate-spin text-primary text-4xl">
+          progress_activity
+        </span>
+      </div>
     );
   }
 
   return (
-    <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700 border border-blue-200">
-      Upcoming
-    </span>
+    <div className="p-8 max-w-6xl mx-auto">
+      <div className="mb-8">
+        <h2 className="text-2xl font-black">My Bookings</h2>
+        <p className="text-slate-500 text-sm mt-1">
+          Manage your upcoming and past meeting room reservations.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        {bookings.length === 0 ? (
+          <div className="bg-white border-2 border-dashed border-slate-200 rounded-3xl p-12 text-center">
+            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300">
+              <span className="material-symbols-outlined !text-4xl">event_busy</span>
+            </div>
+            <h3 className="text-lg font-bold text-slate-900">No bookings found</h3>
+            <p className="text-slate-500 text-sm max-w-xs mx-auto mt-2">
+              You haven't made any room reservations yet. Head over to the Rooms page to start.
+            </p>
+          </div>
+        ) : (
+          bookings.map((booking) => (
+            <BookingCard
+              key={booking.id}
+              booking={booking}
+              onCancel={() => handleCancel(booking.id)}
+              isCancelling={cancelMutation.isPending && cancelMutation.variables === booking.id}
+            />
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+function BookingCard({
+  booking,
+  onCancel,
+  isCancelling
+}: {
+  booking: Booking;
+  onCancel: () => void;
+  isCancelling?: boolean;
+}) {
+  const isCancelled = booking.status === "cancelled";
+
+  return (
+    <div className={`bg-white border rounded-2xl p-6 transition-all hover:border-primary/20 ${isCancelled ? 'opacity-60' : 'hover:shadow-lg hover:shadow-primary/5'}`}>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+            <span className="material-symbols-outlined">meeting_room</span>
+          </div>
+          <div>
+            <h3 className="font-bold text-lg">{booking.title}</h3>
+            <div className="flex flex-wrap items-center gap-y-2 gap-x-4 mt-1 text-sm text-slate-500">
+              <div className="flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-base">location_on</span>
+                {booking.rooms?.name || "Unknown Room"}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-base">calendar_today</span>
+                {format(new Date(booking.start_time), "MMM d, yyyy")}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-base">schedule</span>
+                {format(new Date(booking.start_time), "HH:mm")} - {format(new Date(booking.end_time), "HH:mm")}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 pt-4 md:pt-0">
+          <div className="flex flex-col items-end">
+            <span className={`px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider ${isCancelled
+                ? "bg-slate-100 text-slate-500"
+                : booking.status === "confirmed"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-amber-100 text-amber-700"
+              }`}>
+              {booking.status}
+            </span>
+            <p className="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-tighter">
+              Booking Ref: {booking.id.slice(0, 8)}
+            </p>
+          </div>
+
+          <button
+            onClick={onCancel}
+            disabled={isCancelled || isCancelling}
+            className={`flex items-center justify-center w-10 h-10 rounded-full transition-all ${isCancelled
+                ? "bg-slate-50 text-slate-300 pointer-events-none"
+                : "bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white"
+              }`}
+            title="Cancel booking"
+          >
+            {isCancelling ? (
+              <span className="material-symbols-outlined animate-spin !text-xl">progress_activity</span>
+            ) : (
+              <span className="material-symbols-outlined !text-xl">close</span>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -11,6 +11,7 @@ interface AddRoomModalProps {
     amenities: string[];
     isActive: boolean;
   }) => Promise<void> | void;
+  loading?: boolean;
 }
 
 // 🔧 FIX: เปลี่ยนชื่อเป็น DEFAULT_AMENITIES เพื่อชัดเจนว่าเป็นค่าเริ่มต้น
@@ -26,6 +27,7 @@ export function AddRoomModal({
   open,
   onClose,
   onSave,
+  loading: externalLoading,
 }: AddRoomModalProps) {
   const [name, setName] = useState("");
   const [capacity, setCapacity] = useState(0);
@@ -43,7 +45,9 @@ export function AddRoomModal({
   const [newAmenity, setNewAmenity] = useState("");
 
   const [isActive, setIsActive] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [internalLoading, setInternalLoading] = useState(false);
+
+  const loading = externalLoading ?? internalLoading;
 
   // 🔧 FIX: toggle เลือก / ยกเลิก amenity
   const toggleAmenity = (a: string) => {
@@ -60,27 +64,28 @@ export function AddRoomModal({
       return;
     }
 
-    setLoading(true);
+    setInternalLoading(true);
 
-    await onSave({
-      name,
-      capacity,
-      location,
-      amenities,
-      isActive,
-    });
+    try {
+      await onSave({
+        name,
+        capacity,
+        location,
+        amenities,
+        isActive,
+      });
 
-    setLoading(false);
-    onClose();
-
-    // 🔧 FIX: reset form หลัง save
-    setName("");
-    setCapacity(0);
-    setLocation("");
-    setAmenities([]);
-    setNewAmenity("");
-    setAmenityList(DEFAULT_AMENITIES);
-    setIsActive(true);
+      // 🔧 FIX: reset form หลัง save
+      setName("");
+      setCapacity(0);
+      setLocation("");
+      setAmenities([]);
+      setNewAmenity("");
+      setAmenityList(DEFAULT_AMENITIES);
+      setIsActive(true);
+    } finally {
+      setInternalLoading(false);
+    }
   };
 
   return (
@@ -155,11 +160,10 @@ export function AddRoomModal({
                   key={a}
                   type="button"
                   onClick={() => toggleAmenity(a)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all ${
-                    amenities.includes(a)
-                      ? "bg-primary text-white border-primary"
-                      : "bg-white border-slate-200"
-                  }`}
+                  className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all ${amenities.includes(a)
+                    ? "bg-primary text-white border-primary"
+                    : "bg-white border-slate-200"
+                    }`}
                 >
                   {a}
                 </button>

@@ -28,29 +28,28 @@ export function Sidebar() {
         {/* Navigation */}
         <nav className="flex flex-col gap-1 text-sm">
 
-          <SidebarLink to="/" icon="dashboard" label="Dashboard" end />
+          <SidebarLink to="/app" icon="dashboard" label="Dashboard" end />
 
           <SidebarLink
-            to="/calendar"
+            to="/app/calendar"
             icon="calendar_today"
             label="Calendar"
           />
 
           <SidebarLink
-            to="/bookings"
+            to="/app/bookings"
             icon="bookmark"
             label="My Bookings"
-            badge={3}
           />
 
           <SidebarLink
-            to="/rooms"
+            to="/app/rooms"
             icon="door_open"
             label="Rooms"
           />
 
           <SidebarLink
-            to="/settings"
+            to="/app/settings"
             icon="settings"
             label="Settings"
           />
@@ -89,10 +88,9 @@ function SidebarLink({ to, icon, label, end, badge }: Props) {
       to={to}
       end={end}
       className={({ isActive }) =>
-        `flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors ${
-          isActive
-            ? "bg-primary/10 text-primary font-semibold"
-            : "text-slate-600 hover:bg-slate-100"
+        `flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors ${isActive
+          ? "bg-primary/10 text-primary font-semibold"
+          : "text-slate-600 hover:bg-slate-100"
         }`
       }
     >
