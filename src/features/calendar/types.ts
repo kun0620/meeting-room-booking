@@ -11,8 +11,18 @@ export type Booking = {
   date: string;
   start: string;
   end: string;
-  status: "confirmed" | "pending";
+  start_time: string;
+  end_time: string;
+  status: "confirmed" | "cancelled" | "pending";
   participants: Participant[];
+  profiles?: {
+    full_name: string;
+    email: string;
+  };
+  rooms?: {
+    name: string;
+    amenities: string[];
+  };
 };
 
 /* 👇 ใช้เฉพาะ Calendar layout */
@@ -20,4 +30,6 @@ export type CalendarBooking = Booking & {
   dayIndex: number;
   top: number;
   height: number;
+  room_id: string;
+  amenities?: string[];
 };

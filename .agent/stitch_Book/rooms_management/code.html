@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RoomSync - Rooms Management</title>
+<!-- Tailwind CSS with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6324eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex min-h-screen overflow-hidden">
+<!-- Side Navigation Bar -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark h-screen sticky top-0 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="h-10 w-10 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined !text-2xl">meeting_room</span>
+</div>
+<h1 class="text-xl font-black tracking-tight text-slate-900 dark:text-white">RoomSync</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1 mt-4">
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">grid_view</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-bold text-primary bg-primary/10 dark:bg-primary/20 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined material-symbols-fill">door_front</span>
+                    Rooms
+                </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">calendar_today</span>
+                    Bookings
+                </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">bar_chart</span>
+                    Analytics
+                </a>
+<div class="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">settings</span>
+                        Settings
+                    </a>
+</div>
+</nav>
+<div class="p-4 mt-auto">
+<div class="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Admin Profile" class="h-full w-full object-cover" data-alt="Professional headshot of a smiling male admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7ARXzQ8zrUAy6eYA4Ql51xlbw5sroIK_byjhWbmosK0xCefgr_qeqVjyldRefTFoUdoIT2n7JTiUQu8YjUuS-Fn5inp7x0HJaxY6fb_hHGnS-KS_nKxrB54WEhl5aixwu66sszJkha5rXwk4uAy6cEV1th7-yQQhcHNf7jqQX0u3duo_33KrAX_IRd35zofNBnP0ifl9e4TirOZJqsUHBFWqzE95wy-Oi4BrF1NM15b4QA-9S9cPF-xBc1B41MkocvstToR-_CAwn"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">Alex Morgan</p>
+<p class="text-[10px] text-slate-500 uppercase font-semibold">Admin</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Header -->
+<header class="h-20 flex items-center justify-between px-8 bg-white dark:bg-background-dark/50 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10 backdrop-blur-md">
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800/50 border-none rounded-xl py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-slate-400" placeholder="Search rooms by name or location..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 ml-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-lg shadow-primary/20 active:scale-95">
+<span class="material-symbols-outlined !text-lg">add_circle</span>
+                        Add Room
+                    </button>
+</div>
+</header>
+<div class="p-8 overflow-y-auto">
+<div class="mb-8">
+<h2 class="text-2xl font-black text-slate-900 dark:text-white">Rooms Management</h2>
+<p class="text-slate-500 text-sm mt-1">Manage and monitor all 12 available meeting spaces across your offices.</p>
+</div>
+<!-- Grid of Room Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Apollo Boardroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern high-tech boardroom with glass walls" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9a_8U6VzZujD1m3fmoJqemu0O2O1ScixyLVV0g8HpzLHMxgAPaM7ncp6s0ek-CJZz2PkFJ43Hos3XjTVxAsZusWGKxuS3Rinicee77mki-qJ5rumUT-74JgAaywnDHGfF1ekflYaGQFyb7e9WHQk9au0-asgn8m8pAVw1j6PZNvfltmnoU9bzwDAGxCLo0yIklifYSmJXPoQQeenp74qmQlWLrZBoBW8LzoNrziNI5u-kf_4XfC6sTUOOg5L8cg04hcxx3HB9okUC"/>
+<div class="absolute top-3 right-3">
+<span class="bg-primary/90 backdrop-blur-md text-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-wider">Premium</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Apollo Boardroom</h3>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base">groups</span>
+                                            12 People
+                                        </div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base text-primary">location_on</span>
+                                            Floor 2, East
+                                        </div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Status</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Zen Den" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cozy room with bean bags and soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYlDW8toqNJnY1hXwE2yRfCks3EwHChKXsJ65fRCSpbuxqf6NufaYGkUxF6B6IaGBUP9x03LupzvfSBkMn5ZlF56pAMo_ynjEZjo3oiBTtcKRgPAXuyZx9_xlle7tHOQyOs2r3BlX_48N9Pk7V7n29XSkx0xSK26MTh7q_ymsKbH2y8g15lD-tmoJjeB6yrgdeoUzb5dlaxfFC2LX6O5QBft2EAYBqqn9jYJqcPRfy9ZcS8uS7f9TFAMX7yav1xqvWFRxPoa687t3p"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Zen Den</h3>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base">groups</span>
+                                            4 People
+                                        </div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base text-primary">location_on</span>
+                                            Floor 1, Suite 101
+                                        </div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Status</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group flex flex-col opacity-75 grayscale-[0.5]">
+<div class="relative h-48 overflow-hidden">
+<img alt="Workshop Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Industrial style workshop room with large table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_C52Xz_aTCDJMgDgmQyE2-FlAPjJRGoErn8HSLsMd7ob095j1cBDH-IwxasWer-JElsIvte7aAOAIzz6mSBwEBQ2ZBZSkkuyWCVSHkBCyVCf5Q5cEXDnZSlPddA1QWaGeXIDHcFFCrERdBYYdM0ooQYh-GZNQXZv5HOY9Hzxjo5Pc1O8VSDPd5zi6zld5cAO4rcemg2btygNI1Obk1tt-pIFO-QyOte43l8JYzaGbRMFbllrQz28jTguUTX2qo0q9AyvOsxmuo0Cf"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Workshop Lab</h3>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base">groups</span>
+                                            20 People
+                                        </div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base text-primary">location_on</span>
+                                            Floor 3, West
+                                        </div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Status</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Innovation Hub" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Circular seating area with whiteboard walls" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWrRNj60SUUaExtktwyb_3Nl4sqPVcx5gWWhGEkuedW67x5sIfIoTL965R7OL17yaON00pUyaCnpIxauDGOTqfFC6j3sLBuHd7-3qx3I6z4tBo9h7DqJ69qGg1pbXAZyT9FOtGATnQLiWlGHsn1d2ypMy1ozUEjlHjBACGQrnjWutvAGaqMJiNCmYSx8iQP5HU82U9FjHwqgynS20-tvQHBKNnDlRYIO8u5wq1DC9I_MqpQSDlTiParugXwCwAE4w1ngj7QU2h46eS"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Innovation Hub</h3>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base">groups</span>
+                                            8 People
+                                        </div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base text-primary">location_on</span>
+                                            Floor 4, Penthouse
+                                        </div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Status</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="The Library" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Quiet library room with mahogany tables and books" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ_eQS-Zwvn0A2jn_4zTJ3KXQuZKVSLelfwOdLnuQmfPt4tCUlBs3koLrR7CwCG8OIUGJu5w_6LH8tD_9aRYuAkNctBzZJXKzEX_gLQiC9hvO9MifTYe503XjbJc8Fpgl-p9lsqZh5_clYCjFOymQSpoqkn1Q-oDA1q7S5wbNscHbaFNscrNwfsnYBFcKSXFS1p3WeQvsgUaNZODu93sBJo8OoP-w0QhPVGEuWaFuP5TGsbcWk3HPAY03wPuXLYlTTskfVsUaZVqpc"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">The Library</h3>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base">groups</span>
+                                            6 People
+                                        </div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined !text-base text-primary">location_on</span>
+                                            Basement 1
+                                        </div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Status</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Add New Room Empty State Card -->
+<button class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center justify-center p-8 gap-4 hover:bg-white dark:hover:bg-slate-800/30 hover:border-primary/40 transition-all group">
+<div class="h-12 w-12 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-all">
+<span class="material-symbols-outlined !text-3xl">add</span>
+</div>
+<div class="text-center">
+<p class="font-bold text-slate-600 dark:text-slate-400 group-hover:text-primary">Add New Space</p>
+<p class="text-xs text-slate-400">Configure another room</p>
+</div>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

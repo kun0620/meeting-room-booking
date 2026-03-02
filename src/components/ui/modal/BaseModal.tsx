@@ -33,7 +33,7 @@ export function BaseModal({
 
       {/* Modal */}
       <div
-        className={`relative w-full ${maxWidth} bg-white dark:bg-slate-900 rounded-xl shadow-2xl`}
+        className={`relative w-full ${maxWidth} bg-white dark:bg-slate-900 rounded-[32px] shadow-2xl overflow-hidden`}
       >
         {children}
       </div>

@@ -2,23 +2,51 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import type { User } from "@supabase/supabase-js";
 
+export interface AppUser extends User {
+  full_name?: string;
+  avatar_url?: string;
+  role?: string;
+}
+
 export function useAuth() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const fetchProfile = async (baseUser: User | null) => {
+    if (!baseUser) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", baseUser.id)
+        .single();
+
+      setUser({ ...baseUser, ...profile });
+    } catch (err) {
+      console.error("Error fetching profile:", err);
+      setUser(baseUser as AppUser);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user);
-      setLoading(false);
+      fetchProfile(data.user);
     });
 
-    const { data } = supabase.auth.onAuthStateChange(
+    const { data: listener } = supabase.auth.onAuthStateChange(
       (_, session) => {
-        setUser(session?.user ?? null);
+        fetchProfile(session?.user ?? null);
       }
     );
 
-    return () => data.subscription.unsubscribe();
+    return () => listener.subscription.unsubscribe();
   }, []);
 
   return { user, loading };

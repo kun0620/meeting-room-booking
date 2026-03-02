@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RoomSync Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6324eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between p-4">
+<div class="flex flex-col gap-8">
+<!-- Brand -->
+<div class="flex items-center gap-3 px-2">
+<div class="bg-primary rounded-lg p-2 text-white">
+<span class="material-symbols-outlined text-2xl">meeting_room</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-none">RoomSync</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Workspace Manager</p>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="text-sm">My Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">door_open</span>
+<span class="text-sm">Rooms</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Bottom Action -->
+<div class="bg-primary/5 rounded-xl p-4 flex flex-col gap-3">
+<p class="text-xs text-slate-600 dark:text-slate-400 text-center">Need more features?</p>
+<button class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold shadow-md shadow-primary/20 hover:bg-primary/90 transition-all">
+                    Upgrade Pro
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<span class="text-slate-400">/</span>
+<h2 class="text-slate-800 dark:text-white font-semibold">TechCorp Workspace</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary/20" placeholder="Search rooms..." type="text"/>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-primary/20 transition-colors">
+                        Upgrade
+                    </button>
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden ring-2 ring-white dark:ring-slate-800 shadow-sm">
+<img alt="User Profile" data-alt="Close up professional headshot of a smiling man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ_hIb47pz9ClJng88D_ld9Zk-WlUiJCoRpoGnNPuezgDITagdJWp3TCrXqvbO_OIpDgNt_hh2PPnlutEgeLaVC3mm8U1Hgi2U9qN05vkkrMb-ScMBLrLgutetbIInSD3ku3pilGb8VdS_knZWZGHku9-quQrEswCq3KUpixfdNSqnrClyVaGWfSwAZGr67qrHKd2JvCjDwPGl25ZVh_PiAcZC8aHy7UXXG-a2i7bl52ssLPZqu4wcteEnonuyXuEeNbds_MPl5uUt"/>
+</div>
+</div>
+</header>
+<!-- Content Scrollable -->
+<div class="flex-1 overflow-y-auto p-8 bg-background-light dark:bg-background-dark">
+<!-- Welcome Section -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Good morning, Alex!</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Here is what's happening today in your office.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-primary/25 hover:-translate-y-0.5 transition-all">
+<span class="material-symbols-outlined text-xl">add</span>
+<span>Book a Room</span>
+</button>
+</div>
+<!-- Stats Summary Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+<div class="size-12 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">apartment</span>
+</div>
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Rooms</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-white">12</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+<div class="size-12 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">event_available</span>
+</div>
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Today's Bookings</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-white">8</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+<div class="size-12 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">notifications_active</span>
+</div>
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Upcoming Meetings</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-white">3</p>
+</div>
+</div>
+</div>
+<!-- Main Visualization Area -->
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-8">
+<!-- Usage Chart -->
+<div class="lg:col-span-3 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Weekly Room Usage</h3>
+<p class="text-sm text-slate-500">Occupancy rate per day</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-primary">84%</p>
+<p class="text-xs text-emerald-600 font-bold">+5% from last week</p>
+</div>
+</div>
+<div class="flex items-end justify-between h-48 gap-2 px-2 mt-8">
+<!-- Mon -->
+<div class="flex flex-col items-center flex-1 gap-3 h-full">
+<div class="w-full bg-primary/10 rounded-t-lg relative group h-full flex flex-col justify-end overflow-hidden">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 60%;"></div>
+</div>
+<span class="text-xs font-semibold text-slate-400">Mon</span>
+</div>
+<!-- Tue -->
+<div class="flex flex-col items-center flex-1 gap-3 h-full">
+<div class="w-full bg-primary/10 rounded-t-lg relative group h-full flex flex-col justify-end overflow-hidden">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 75%;"></div>
+</div>
+<span class="text-xs font-semibold text-slate-400">Tue</span>
+</div>
+<!-- Wed -->
+<div class="flex flex-col items-center flex-1 gap-3 h-full">
+<div class="w-full bg-primary/10 rounded-t-lg relative group h-full flex flex-col justify-end overflow-hidden">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 40%;"></div>
+</div>
+<span class="text-xs font-semibold text-slate-400">Wed</span>
+</div>
+<!-- Thu -->
+<div class="flex flex-col items-center flex-1 gap-3 h-full">
+<div class="w-full bg-primary/10 rounded-t-lg relative group h-full flex flex-col justify-end overflow-hidden">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 90%;"></div>
+</div>
+<span class="text-xs font-semibold text-slate-400">Thu</span>
+</div>
+<!-- Fri -->
+<div class="flex flex-col items-center flex-1 gap-3 h-full">
+<div class="w-full bg-primary/10 rounded-t-lg relative group h-full flex flex-col justify-end overflow-hidden">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 65%;"></div>
+</div>
+<span class="text-xs font-semibold text-slate-400">Fri</span>
+</div>
+<!-- Sat -->
+<div class="flex flex-col items-center flex-1 gap-3 h-full">
+<div class="w-full bg-primary/10 rounded-t-lg relative group h-full flex flex-col justify-end overflow-hidden">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 25%;"></div>
+</div>
+<span class="text-xs font-semibold text-slate-400">Sat</span>
+</div>
+<!-- Sun -->
+<div class="flex flex-col items-center flex-1 gap-3 h-full">
+<div class="w-full bg-primary/10 rounded-t-lg relative group h-full flex flex-col justify-end overflow-hidden">
+<div class="w-full bg-primary rounded-t-lg transition-all" style="height: 15%;"></div>
+</div>
+<span class="text-xs font-semibold text-slate-400">Sun</span>
+</div>
+</div>
+</div>
+<!-- Next Bookings List -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-slate-900 dark:text-white">Next 5 Bookings</h3>
+<a class="text-xs text-primary font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="flex flex-col flex-1 divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Item 1 -->
+<div class="py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-10 bg-primary rounded-full"></div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white leading-none mb-1">Project Sync</p>
+<p class="text-xs text-slate-500">Boardroom A • Host: Alex M.</p>
+</div>
+</div>
+<span class="text-xs font-bold bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">10:00 AM</span>
+</div>
+<!-- Item 2 -->
+<div class="py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-10 bg-blue-400 rounded-full"></div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white leading-none mb-1">Client Presentation</p>
+<p class="text-xs text-slate-500">Sky Lounge • Host: Sarah K.</p>
+</div>
+</div>
+<span class="text-xs font-bold bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">11:30 AM</span>
+</div>
+<!-- Item 3 -->
+<div class="py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-10 bg-amber-400 rounded-full"></div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white leading-none mb-1">Design Critique</p>
+<p class="text-xs text-slate-500">Focus Hub 2 • Host: David R.</p>
+</div>
+</div>
+<span class="text-xs font-bold bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">01:00 PM</span>
+</div>
+<!-- Item 4 -->
+<div class="py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-10 bg-emerald-400 rounded-full"></div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white leading-none mb-1">HR Monthly Review</p>
+<p class="text-xs text-slate-500">Quiet Zone • Host: Emily W.</p>
+</div>
+</div>
+<span class="text-xs font-bold bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">02:30 PM</span>
+</div>
+<!-- Item 5 -->
+<div class="py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-10 bg-slate-300 rounded-full"></div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white leading-none mb-1">Daily Standup</p>
+<p class="text-xs text-slate-500">Boardroom B • Host: Alex M.</p>
+</div>
+</div>
+<span class="text-xs font-bold bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">04:00 PM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Quick Access -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:border-primary/40 cursor-pointer transition-colors group">
+<div class="size-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-primary">
+<span class="material-symbols-outlined">map</span>
+</div>
+<span class="text-sm font-bold">Floor Map</span>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:border-primary/40 cursor-pointer transition-colors group">
+<div class="size-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-primary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="text-sm font-bold">Teams</span>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:border-primary/40 cursor-pointer transition-colors group">
+<div class="size-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-primary">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<span class="text-sm font-bold">Resources</span>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:border-primary/40 cursor-pointer transition-colors group">
+<div class="size-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-primary">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<span class="text-sm font-bold">IT Support</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

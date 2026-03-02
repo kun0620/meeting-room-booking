@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RoomSync Design System &amp; Style Guide</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            roomsync: {
+              primary: '#2563EB',
+              success: '#16A34A',
+              danger: '#DC2626',
+              background: '#F5F7FA',
+              border: '#E2E8F0',
+              text: {
+                main: '#1F2937',
+                muted: '#6B7280'
+              }
+            }
+          },
+          borderRadius: {
+            'rs': '12px',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    body {
+      background-color: #F5F7FA;
+      color: #1F2937;
+    }
+    .style-guide-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      margin-bottom: 2rem;
+    }
+    .swatch {
+      height: 80px;
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+  </style>
+</head>
+<body class="p-6 md:p-12">
+<!-- BEGIN: Header -->
+<header class="mb-12 border-b border-gray-200 pb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 bg-roomsync-primary rounded-rs flex items-center justify-center">
+<svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h1 class="text-3xl font-bold tracking-tight">RoomSync Design System</h1>
+</div>
+<p class="text-roomsync-text-muted">Developer handoff documentation for v1.0. Last updated: Oct 2023.</p>
+</header>
+<!-- END: Header -->
+<main class="max-w-7xl mx-auto">
+<!-- BEGIN: BrandColors -->
+<section class="style-guide-section" data-purpose="brand-colors">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-1 h-6 bg-roomsync-primary rounded-full"></span>
+        1. Brand Colors
+      </h2>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<!-- Primary -->
+<div>
+<div class="swatch bg-roomsync-primary"></div>
+<p class="text-sm font-semibold">Primary</p>
+<p class="text-xs text-roomsync-text-muted">#2563EB</p>
+</div>
+<!-- Success -->
+<div>
+<div class="swatch bg-roomsync-success"></div>
+<p class="text-sm font-semibold">Success</p>
+<p class="text-xs text-roomsync-text-muted">#16A34A</p>
+</div>
+<!-- Danger -->
+<div>
+<div class="swatch bg-roomsync-danger"></div>
+<p class="text-sm font-semibold">Danger</p>
+<p class="text-xs text-roomsync-text-muted">#DC2626</p>
+</div>
+<!-- Neutral -->
+<div>
+<div class="swatch bg-gray-500"></div>
+<p class="text-sm font-semibold">Neutral Gray</p>
+<p class="text-xs text-roomsync-text-muted">#6B7280</p>
+</div>
+<!-- Background -->
+<div>
+<div class="swatch bg-[#F5F7FA] border border-gray-200"></div>
+<p class="text-sm font-semibold">Background</p>
+<p class="text-xs text-roomsync-text-muted">#F5F7FA</p>
+</div>
+</div>
+</section>
+<!-- END: BrandColors -->
+<!-- BEGIN: Typography -->
+<section class="style-guide-section" data-purpose="typography">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-1 h-6 bg-roomsync-primary rounded-full"></span>
+        2. Typography (Inter Font Family)
+      </h2>
+<div class="space-y-6">
+<div class="flex items-baseline border-b border-gray-100 pb-4">
+<span class="w-24 text-xs font-mono text-gray-400">H1</span>
+<h1 class="text-4xl font-bold">The quick brown fox</h1>
+<span class="ml-auto text-xs text-gray-400">Bold 36px / 2.25rem</span>
+</div>
+<div class="flex items-baseline border-b border-gray-100 pb-4">
+<span class="w-24 text-xs font-mono text-gray-400">H2</span>
+<h2 class="text-2xl font-semibold">The quick brown fox</h2>
+<span class="ml-auto text-xs text-gray-400">SemiBold 24px / 1.5rem</span>
+</div>
+<div class="flex items-baseline border-b border-gray-100 pb-4">
+<span class="w-24 text-xs font-mono text-gray-400">H3</span>
+<h3 class="text-lg font-semibold">The quick brown fox</h3>
+<span class="ml-auto text-xs text-gray-400">SemiBold 18px / 1.125rem</span>
+</div>
+<div class="flex items-baseline border-b border-gray-100 pb-4">
+<span class="w-24 text-xs font-mono text-gray-400">Body</span>
+<p class="text-base">The quick brown fox jumps over the lazy dog.</p>
+<span class="ml-auto text-xs text-gray-400">Regular 16px / 1rem</span>
+</div>
+<div class="flex items-baseline">
+<span class="w-24 text-xs font-mono text-gray-400">Small</span>
+<p class="text-sm text-roomsync-text-muted">The quick brown fox jumps over the lazy dog.</p>
+<span class="ml-auto text-xs text-gray-400">Regular 14px / 0.875rem</span>
+</div>
+</div>
+</section>
+<!-- END: Typography -->
+<!-- BEGIN: Buttons -->
+<section class="style-guide-section" data-purpose="buttons">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-1 h-6 bg-roomsync-primary rounded-full"></span>
+        3. Buttons
+      </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- States -->
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Primary</h4>
+<button class="w-full bg-roomsync-primary hover:bg-blue-700 text-white font-medium py-2.5 px-5 rounded-rs transition-colors">Default</button>
+<button class="w-full bg-blue-700 text-white font-medium py-2.5 px-5 rounded-rs">Hover State</button>
+<button class="w-full bg-roomsync-primary/50 text-white/80 font-medium py-2.5 px-5 rounded-rs cursor-not-allowed">Disabled</button>
+</div>
+<!-- Secondary & Danger -->
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Secondary &amp; Danger</h4>
+<button class="w-full bg-white border border-roomsync-border hover:bg-gray-50 text-roomsync-text-main font-medium py-2.5 px-5 rounded-rs transition-colors">Secondary</button>
+<button class="w-full bg-roomsync-danger hover:bg-red-700 text-white font-medium py-2.5 px-5 rounded-rs transition-colors">Danger Action</button>
+<button class="w-full bg-roomsync-danger/50 text-white/80 font-medium py-2.5 px-5 rounded-rs cursor-not-allowed">Danger Disabled</button>
+</div>
+<!-- Ghost -->
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Ghost</h4>
+<button class="w-full bg-transparent hover:bg-gray-100 text-roomsync-primary font-medium py-2.5 px-5 rounded-rs transition-colors">Ghost Primary</button>
+<button class="w-full bg-transparent hover:bg-gray-100 text-roomsync-text-muted font-medium py-2.5 px-5 rounded-rs transition-colors">Ghost Neutral</button>
+</div>
+</div>
+</section>
+<!-- END: Buttons -->
+<!-- BEGIN: FormElements -->
+<section class="style-guide-section" data-purpose="form-elements">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-1 h-6 bg-roomsync-primary rounded-full"></span>
+        4. Form Elements
+      </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Inputs -->
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Default Input</label>
+<input class="w-full border-gray-300 rounded-rs focus:ring-roomsync-primary focus:border-roomsync-primary" placeholder="Enter text..." type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Focus State</label>
+<input class="w-full border-roomsync-primary ring-2 ring-roomsync-primary ring-opacity-20 rounded-rs" type="text" value="Active focus state"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-red-600 mb-1">Error State</label>
+<input class="w-full border-roomsync-danger text-roomsync-danger focus:ring-roomsync-danger focus:border-roomsync-danger rounded-rs" type="text" value="Invalid entry"/>
+<p class="mt-1 text-xs text-roomsync-danger italic">This field is required.</p>
+</div>
+</div>
+<!-- Select & Checkbox -->
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Select Dropdown</label>
+<select class="w-full border-gray-300 rounded-rs focus:ring-roomsync-primary focus:border-roomsync-primary">
+<option>Conference Room A</option>
+<option>Meeting Room B</option>
+<option>Private Office 1</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-medium text-gray-700 mb-1">Checkboxes</label>
+<label class="flex items-center gap-3">
+<input checked="" class="h-5 w-5 rounded border-gray-300 text-roomsync-primary focus:ring-roomsync-primary" type="checkbox"/>
+<span class="text-sm text-gray-600">Wifi Available</span>
+</label>
+<label class="flex items-center gap-3">
+<input class="h-5 w-5 rounded border-gray-300 text-roomsync-primary focus:ring-roomsync-primary" type="checkbox"/>
+<span class="text-sm text-gray-600">Projector Support</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- END: FormElements -->
+<!-- BEGIN: Components -->
+<section class="style-guide-section" data-purpose="components">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-1 h-6 bg-roomsync-primary rounded-full"></span>
+        5. Components
+      </h2>
+<div class="space-y-12">
+<!-- Badges -->
+<div>
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Status Badges</h4>
+<div class="flex gap-4">
+<span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Confirmed</span>
+<span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
+<span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Cancelled</span>
+</div>
+</div>
+<!-- Sample Card -->
+<div class="max-w-md">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Standard Card</h4>
+<div class="bg-white border border-gray-200 rounded-rs overflow-hidden shadow-sm">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-bold text-lg">Morning Workshop</h3>
+<span class="bg-blue-50 text-roomsync-primary text-[10px] font-bold px-2 py-1 rounded uppercase">External</span>
+</div>
+<p class="text-sm text-roomsync-text-muted mb-6">Strategy session for the upcoming Q4 product launch and marketing roadmap.</p>
+<div class="flex items-center justify-between pt-4 border-t border-gray-50">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="w-8 h-8 rounded-full bg-green-200 border-2 border-white flex items-center justify-center text-[10px] font-bold">AS</div>
+<div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-[10px] font-bold">+3</div>
+</div>
+<span class="text-xs text-gray-400 italic">Today, 09:00 AM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Table -->
+<div>
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Table Row Example</h4>
+<div class="overflow-hidden border border-gray-200 rounded-rs">
+<table class="min-w-full divide-y divide-gray-200">
+<thead class="bg-gray-50">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Resource</th>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Capacity</th>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+<th class="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
+</tr>
+</thead>
+<tbody class="bg-white divide-y divide-gray-200">
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-8 w-8 bg-roomsync-primary/10 rounded flex items-center justify-center">
+<svg class="h-4 w-4 text-roomsync-primary" fill="currentColor" viewbox="0 0 20 20"><path d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4z"></path></svg>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-gray-900">Executive Suite 402</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">12 Persons</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Available</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<a class="text-roomsync-primary hover:text-blue-900" href="#">Edit</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Components -->
+<!-- BEGIN: CSSVariables -->
+<section class="style-guide-section bg-gray-900 text-gray-300" data-purpose="css-variables">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+<span class="w-1 h-6 bg-roomsync-primary rounded-full"></span>
+        6. CSS Variables Block
+      </h2>
+<pre class="bg-black/30 p-6 rounded-rs overflow-x-auto text-sm leading-relaxed"><code class="text-blue-400">:root</code> {
+  <span class="text-green-400">/* Brand Colors */</span>
+  <span class="text-white">--primary:</span> <span class="text-yellow-200">#2563EB;</span>
+  <span class="text-white">--success:</span> <span class="text-yellow-200">#16A34A;</span>
+  <span class="text-white">--danger:</span> <span class="text-yellow-200">#DC2626;</span>
+  <span class="text-white">--background:</span> <span class="text-yellow-200">#F5F7FA;</span>
+
+  <span class="text-green-400">/* Grays */</span>
+  <span class="text-white">--gray-50:</span> <span class="text-yellow-200">#F9FAFB;</span>
+  <span class="text-white">--gray-200:</span> <span class="text-yellow-200">#E5E7EB;</span>
+  <span class="text-white">--gray-500:</span> <span class="text-yellow-200">#6B7280;</span>
+  <span class="text-white">--gray-900:</span> <span class="text-yellow-200">#111827;</span>
+
+  <span class="text-green-400">/* Borders &amp; Radius */</span>
+  <span class="text-white">--radius-sm:</span> <span class="text-yellow-200">8px;</span>
+  <span class="text-white">--radius-main:</span> <span class="text-yellow-200">12px;</span>
+  <span class="text-white">--border-color:</span> <span class="text-yellow-200">#E2E8F0;</span>
+
+  <span class="text-green-400">/* Typography */</span>
+  <span class="text-white">--font-family:</span> <span class="text-yellow-200">'Inter', sans-serif;</span>
+  <span class="text-white">--text-main:</span> <span class="text-yellow-200">#1F2937;</span>
+  <span class="text-white">--text-muted:</span> <span class="text-yellow-200">#6B7280;</span>
+}</pre>
+</section>
+<!-- END: CSSVariables -->
+</main>
+<footer class="text-center py-12 text-gray-400 text-sm">
+    © 2023 RoomSync Inc. All design assets are property of the design team.
+  </footer>
+</body></html>

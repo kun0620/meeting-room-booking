@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RoomSync - Meeting Room Booking SaaS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#6324eb",
+                "background-light": "#F5F7FA",
+                "background-dark": "#161121",
+              },
+              fontFamily: {
+                "display": ["Inter", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-background-dark/80 px-6 lg:px-40 py-4">
+<div class="mx-auto flex max-w-[1280px] items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined">meeting_room</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">RoomSync</h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#features">Features</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#pricing">Pricing</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">About</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="hidden sm:inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                    Login
+                </button>
+<button class="flex items-center justify-center rounded-lg bg-primary px-5 py-2 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                    Start Free
+                </button>
+</div>
+</div>
+</header>
+<main class="mx-auto max-w-[1280px]">
+<!-- Hero Section -->
+<section class="flex flex-col items-center gap-12 px-6 py-16 lg:flex-row lg:px-40 lg:py-24">
+<div class="flex w-full flex-col gap-8 lg:w-1/2">
+<div class="flex flex-col gap-4">
+<span class="inline-flex w-fit items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+                        New: v2.0 Now Live
+                    </span>
+<h1 class="text-4xl font-extrabold leading-[1.15] tracking-tight text-slate-900 dark:text-white md:text-5xl lg:text-6xl">
+                        Simple Meeting Room Booking for <span class="text-primary">Modern Teams</span>
+</h1>
+<p class="text-lg leading-relaxed text-slate-600 dark:text-slate-400 md:text-xl">
+                        Stop using Excel. Manage room bookings easily with a streamlined platform designed for high-growth workspaces.
+                    </p>
+</div>
+<div class="flex flex-wrap gap-4">
+<button class="flex h-14 min-w-[160px] items-center justify-center rounded-xl bg-primary px-8 text-base font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all">
+                        Start Free
+                    </button>
+<button class="flex h-14 min-w-[160px] items-center justify-center rounded-xl border-2 border-primary/20 bg-transparent px-8 text-base font-bold text-primary hover:bg-primary/5 transition-all">
+                        Book Demo
+                    </button>
+</div>
+<div class="flex items-center gap-4 text-sm text-slate-500">
+<div class="flex -space-x-2">
+<img class="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar profile picture 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxZJRxkN4OP0MDwygxfES2usRKx3WooPoayCj83KyifpI_YpOFvAJoGDsxPag80StxFDr373NHQ2ljEHJ-i96Q2oteR4Au9EYwUJ_6NY-98ZblWQspxpC6yyBJmgnHkbp77AV0T1kBXnA8fUUBI_fPaod2FBOiaPUvgj5A1D21ESXbH922yHREUmowsy6a5RoXMyjo-QN49Vs6GCuYUzpaSedBZ4M2etA4O9CuFjepl1NB_S26FjP45lGNOkp8rcOTQJnkKUikCUXb"/>
+<img class="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar profile picture 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCof5RL1z5umQd1oXxt4ZlW_JfMNypXMUXxsrQuHrF6JejUdW71MjWFZk6us6FTlaIQ7zbnQQL-lAZKV6Tm5tlTJos_v7T1Zp0MXulInXUFDIksowluRc0vFNDtKdByj0zrubdygvTwI3hUzmbFrD-wcKXIS7OH32YESjT8soISWB3b3KSYMJbtueEZI9DqkpdI0fr1M711124Pzia1nnYPZkerIDpD-DEjZwk0jYb3V2k9OG13j6z9V9CLWKSl54WZkeI32Lvj4w0z"/>
+<img class="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar profile picture 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCouDkon0f3OJCELv8leJLCMqQMi0HVJxdNuzXoD5ygsw7as3tAdBYHeEGRiatVsQAJEblvIsnWZWy7JFV3HQD2HuLVGee8uK8miGCMgIZE8V_IhoiDCrMdoqzfTw8gCTp_GjM57JSTmIxqWpT-TqrPB-K34tcO4b4PCYLl7x4l_K924pIliSOGkT9t-5MXDlIPEprKfOjcvuxQ6P1svFspw6CAuheZr0gM_1HDQvsb4Msunvd6umheOqAeDmE4fLqTksCSrzuciUdo"/>
+</div>
+<span>Trusted by 500+ teams worldwide</span>
+</div>
+</div>
+<div class="relative w-full lg:w-1/2">
+<div class="absolute -inset-4 rounded-xl bg-primary/10 blur-2xl"></div>
+<div class="relative overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900">
+<img class="w-full object-cover" data-alt="Clean software dashboard showing meeting schedule calendar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsQJTnJ4xL5keICB0XDfcJTHi6DXUlrNQEcSS_Lo__9FLuKcaKmRY9qfHJkgIUxAV5uP1UEc2AVpaV4WJHiL19nTIhLVHJnOMjxhY8bY4zjL0Js0t5HXZQ8-08-2wLMzD2eORQq6CUwHRFEVHX8X2aXw4blYxkVqxRald8RXSUwunr6HtbX0BvH8bELXto65eG6eXlmZdjtpH9QVc5d4vg7G2zDfuSZrYDzEGQi5hUZthzuTdu0x97RNgzN9_AsIvgoG-VMkNqMgXq"/>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="px-6 py-20 lg:px-40" id="features">
+<div class="mb-16 flex flex-col items-center text-center">
+<h2 class="mb-4 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white md:text-4xl">
+                    Streamline Your Workspace
+                </h2>
+<p class="max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+                    Everything you need to manage meeting rooms efficiently in one place, without the complexity of traditional tools.
+                </p>
+</div>
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+<!-- Smart Calendar -->
+<div class="group flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-900 hover:border-primary/30 transition-all">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Smart Calendar</h3>
+<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                            A fast, drag-and-drop interface designed for quick and easy room scheduling at any scale.
+                        </p>
+</div>
+</div>
+<!-- Prevent Double Booking -->
+<div class="group flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-900 hover:border-primary/30 transition-all">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-500 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Zero Conflicts</h3>
+<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                            Automatic conflict resolution and real-time syncing across all devices prevents double bookings.
+                        </p>
+</div>
+</div>
+<!-- Usage Analytics -->
+<div class="group flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-900 hover:border-primary/30 transition-all">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/10 text-orange-500 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">bar_chart</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Usage Analytics</h3>
+<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                            Data-driven insights on room occupancy, peak booking hours, and space optimization metrics.
+                        </p>
+</div>
+</div>
+<!-- Role Management -->
+<div class="group flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-900 hover:border-primary/30 transition-all">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Role Control</h3>
+<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                            Define granular permissions for admins, managers, and employees to keep control over your assets.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="px-6 py-20 lg:px-40 bg-slate-50 dark:bg-background-dark/50 rounded-3xl mx-4 mb-20" id="pricing">
+<div class="mb-16 flex flex-col items-center text-center">
+<h2 class="mb-4 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white md:text-4xl">
+                    Simple, Transparent Pricing
+                </h2>
+<p class="max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+                    Choose the plan that fits your team's needs. All plans include core booking features.
+                </p>
+</div>
+<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+<!-- Free Plan -->
+<div class="flex flex-col rounded-2xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+<div class="mb-8 flex flex-col gap-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Free</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-slate-900 dark:text-white">$0</span>
+<span class="text-sm text-slate-500">/mo</span>
+</div>
+</div>
+<ul class="mb-10 flex flex-1 flex-col gap-4 text-sm text-slate-600 dark:text-slate-400">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-base">check_circle</span> 2 meeting rooms
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-base">check_circle</span> 50 bookings / month
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-base">check_circle</span> Basic support
+                        </li>
+<li class="flex items-center gap-3 opacity-30 line-through">
+<span class="material-symbols-outlined text-base">check_circle</span> Advanced Analytics
+                        </li>
+</ul>
+<button class="w-full rounded-xl border border-slate-200 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-800 transition-all">
+                        Get Started
+                    </button>
+</div>
+<!-- Pro Plan -->
+<div class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-xl dark:bg-slate-900">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-xs font-bold text-white uppercase tracking-wider">
+                        Most Popular
+                    </div>
+<div class="mb-8 flex flex-col gap-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Pro</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-slate-900 dark:text-white">$49</span>
+<span class="text-sm text-slate-500">/mo</span>
+</div>
+</div>
+<ul class="mb-10 flex flex-1 flex-col gap-4 text-sm text-slate-600 dark:text-slate-400">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span> Unlimited rooms
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span> Unlimited bookings
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span> Advanced Analytics
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span> Priority support
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span> Team management
+                        </li>
+</ul>
+<button class="w-full rounded-xl bg-primary py-3 text-sm font-bold text-white shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all">
+                        Go Pro
+                    </button>
+</div>
+<!-- Enterprise Plan -->
+<div class="flex flex-col rounded-2xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+<div class="mb-8 flex flex-col gap-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Enterprise</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-slate-900 dark:text-white">Custom</span>
+</div>
+</div>
+<ul class="mb-10 flex flex-1 flex-col gap-4 text-sm text-slate-600 dark:text-slate-400">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-base">check_circle</span> Custom branding
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-base">check_circle</span> Full API access
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-base">check_circle</span> Dedicated account manager
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-base">check_circle</span> SSO Integration
+                        </li>
+</ul>
+<button class="w-full rounded-xl border border-slate-200 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-800 transition-all">
+                        Contact Us
+                    </button>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="mb-24 px-6 text-center lg:px-40">
+<div class="rounded-3xl bg-primary p-12 lg:p-20 relative overflow-hidden">
+<div class="absolute top-0 right-0 -mr-20 -mt-20 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 -ml-20 -mb-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl"></div>
+<div class="relative z-10 flex flex-col items-center gap-8">
+<h2 class="text-3xl font-black text-white md:text-5xl">Ready to fix your meeting room chaos?</h2>
+<p class="max-w-xl text-lg text-primary-100/80 text-white/80">
+                        Join thousands of companies using RoomSync to organize their offices. Start your 14-day free trial today.
+                    </p>
+<div class="flex flex-wrap justify-center gap-4">
+<button class="h-14 rounded-xl bg-white px-10 text-base font-bold text-primary hover:bg-slate-50 transition-all">
+                            Get Started Now
+                        </button>
+<button class="h-14 rounded-xl border-2 border-white/30 bg-white/10 px-10 text-base font-bold text-white hover:bg-white/20 transition-all">
+                            Talk to Sales
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="border-t border-slate-200 bg-white px-6 py-12 dark:border-slate-800 dark:bg-background-dark lg:px-40">
+<div class="mx-auto flex max-w-[1280px] flex-col justify-between gap-12 lg:flex-row">
+<div class="flex flex-col gap-6 lg:w-1/3">
+<div class="flex items-center gap-2">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-sm">meeting_room</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">RoomSync</h2>
+</div>
+<p class="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+                    The modern standard for meeting room management. Simplifying workspace logistics for teams of all sizes since 2024.
+                </p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-12 sm:grid-cols-3 lg:w-1/2">
+<div class="flex flex-col gap-4">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">Product</h4>
+<ul class="flex flex-col gap-3 text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary" href="#">Features</a></li>
+<li><a class="hover:text-primary" href="#">Integrations</a></li>
+<li><a class="hover:text-primary" href="#">Pricing</a></li>
+<li><a class="hover:text-primary" href="#">Changelog</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">Company</h4>
+<ul class="flex flex-col gap-3 text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary" href="#">About</a></li>
+<li><a class="hover:text-primary" href="#">Blog</a></li>
+<li><a class="hover:text-primary" href="#">Careers</a></li>
+<li><a class="hover:text-primary" href="#">Contact</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">Legal</h4>
+<ul class="flex flex-col gap-3 text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="mx-auto mt-12 max-w-[1280px] border-t border-slate-100 pt-8 text-center text-xs text-slate-400 dark:border-slate-800">
+            © 2024 RoomSync Inc. All rights reserved.
+        </div>
+</footer>
+</body></html>

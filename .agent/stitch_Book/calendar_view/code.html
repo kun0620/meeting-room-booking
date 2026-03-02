@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RoomSync - Calendar Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6324eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        .active-nav {
+            background-color: rgba(99, 36, 235, 0.1);
+            color: #6324eb;
+            border-right: 3px solid #6324eb;
+        }
+        .time-indicator {
+            top: 240px; /* Simulated current time position */
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 flex h-screen overflow-hidden">
+<!-- Left Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">meeting_room</span>
+</div>
+<span class="text-xl font-bold tracking-tight">RoomSync</span>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded active-nav transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm font-medium">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">door_open</span>
+<span class="text-sm font-medium">Rooms</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Team</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 px-2 py-2">
+<div class="size-10 rounded-full bg-slate-200" data-alt="User avatar profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbRouylIR1wOegnBwdHdElWdWQ8Z8tJAyf69rmKoiLCvkO9IgUtYuFlO6vo1sGrUNnCgp-hl5Io-qz6Xdo7juhU754IFB2fW_BayydoXsX4JWFDoWVap512MZpGLboUHi_EtwwjGZMYn_LHnQJ_KM0XMgLdb2SJZycKCUhPv6yGYc0KPhQ5Q5xA9tqmE4dV8znZs3LqiaFuLTZa1Iat2s7uhrYhd_Jb8kmbIinvFgY-4WTxAKQCjtZTbhV-LtxA-Pi8glHvJkzxyt3')"></div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-sm font-semibold truncate">Alex Rivera</span>
+<span class="text-xs text-slate-500 truncate">Admin Account</span>
+</div>
+<button class="ml-auto p-1 rounded-full hover:bg-slate-100">
+<span class="material-symbols-outlined text-slate-400">settings</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Top Bar -->
+<header class="h-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-6">
+<h1 class="text-xl font-bold">Weekly Schedule</h1>
+<div class="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
+<button class="px-4 py-1.5 text-sm font-medium rounded-md hover:bg-white dark:hover:bg-slate-700 transition-all">Day</button>
+<button class="px-4 py-1.5 text-sm font-medium rounded-md bg-white dark:bg-slate-700 shadow-sm transition-all">Week</button>
+<button class="px-4 py-1.5 text-sm font-medium rounded-md hover:bg-white dark:hover:bg-slate-700 transition-all">Month</button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 mr-4">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span class="text-sm font-semibold">June 17 — 23, 2024</span>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<button class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                    Book Room
+                </button>
+</div>
+</header>
+<!-- Calendar Grid -->
+<div class="flex-1 overflow-y-auto relative bg-white dark:bg-slate-900">
+<!-- Grid Background Lines -->
+<div class="grid grid-cols-8 h-[1000px] border-b border-slate-100 dark:border-slate-800">
+<!-- Time Labels -->
+<div class="flex flex-col text-right pr-4 pt-4 border-r border-slate-100 dark:border-slate-800">
+<div class="h-20 text-xs text-slate-400 font-medium">08:00 AM</div>
+<div class="h-20 text-xs text-slate-400 font-medium">09:00 AM</div>
+<div class="h-20 text-xs text-slate-400 font-medium">10:00 AM</div>
+<div class="h-20 text-xs text-slate-400 font-medium">11:00 AM</div>
+<div class="h-20 text-xs text-slate-400 font-medium">12:00 PM</div>
+<div class="h-20 text-xs text-slate-400 font-medium">01:00 PM</div>
+<div class="h-20 text-xs text-slate-400 font-medium">02:00 PM</div>
+<div class="h-20 text-xs text-slate-400 font-medium">03:00 PM</div>
+<div class="h-20 text-xs text-slate-400 font-medium">04:00 PM</div>
+</div>
+<!-- Days 1-7 -->
+<div class="relative border-r border-slate-100 dark:border-slate-800 flex flex-col">
+<div class="text-center py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
+<span class="block text-xs font-semibold text-slate-500">MON</span>
+<span class="text-lg font-bold">17</span>
+</div>
+<!-- Current Time Indicator -->
+<div class="absolute w-full border-t-2 border-primary z-20 time-indicator flex items-center">
+<div class="size-2 bg-primary rounded-full -ml-1"></div>
+</div>
+</div>
+<div class="relative border-r border-slate-100 dark:border-slate-800">
+<div class="text-center py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
+<span class="block text-xs font-semibold text-slate-500">TUE</span>
+<span class="text-lg font-bold">18</span>
+</div>
+<!-- Example Booking -->
+<div class="absolute top-[160px] left-1 right-1 h-[80px] bg-primary/10 border-l-4 border-primary rounded p-2 z-10 cursor-pointer hover:bg-primary/20">
+<p class="text-[10px] font-bold text-primary uppercase">Conf Room A</p>
+<p class="text-xs font-semibold truncate">Design Review</p>
+</div>
+</div>
+<div class="relative border-r border-slate-100 dark:border-slate-800">
+<div class="text-center py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
+<span class="block text-xs font-semibold text-slate-500">WED</span>
+<span class="text-lg font-bold">19</span>
+</div>
+</div>
+<div class="relative border-r border-slate-100 dark:border-slate-800">
+<div class="text-center py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
+<span class="block text-xs font-semibold text-slate-500 text-primary">THU</span>
+<span class="text-lg font-bold text-primary">20</span>
+</div>
+<!-- Selected Booking -->
+<div class="absolute top-[240px] left-1 right-1 h-[120px] bg-primary border border-primary/20 rounded-lg p-3 z-10 shadow-lg text-white">
+<p class="text-[10px] font-bold opacity-80 uppercase">Board Room 1</p>
+<p class="text-xs font-bold truncate">Q3 Strategy Meeting</p>
+<p class="text-[10px] opacity-80 mt-1">11:00 AM - 12:30 PM</p>
+</div>
+</div>
+<div class="relative border-r border-slate-100 dark:border-slate-800">
+<div class="text-center py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
+<span class="block text-xs font-semibold text-slate-500">FRI</span>
+<span class="text-lg font-bold">21</span>
+</div>
+</div>
+<div class="relative border-r border-slate-100 dark:border-slate-800">
+<div class="text-center py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
+<span class="block text-xs font-semibold text-slate-400">SAT</span>
+<span class="text-lg font-bold text-slate-400">22</span>
+</div>
+</div>
+<div class="relative">
+<div class="text-center py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
+<span class="block text-xs font-semibold text-slate-400">SUN</span>
+<span class="text-lg font-bold text-slate-400">23</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Detail Panel -->
+<aside class="w-[380px] border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col shrink-0">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<h2 class="font-bold text-lg">Booking Details</h2>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-slate-500">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-8">
+<!-- Header Section -->
+<div class="space-y-4">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase">
+<span class="size-1.5 bg-emerald-500 rounded-full"></span>
+                    Confirmed
+                </div>
+<h3 class="text-2xl font-bold leading-tight">Q3 Strategy Meeting: Quarterly Planning</h3>
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-slate-400">event</span>
+<span class="text-sm">Thursday, June 20, 2024</span>
+</div>
+<div class="flex items-center gap-3 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-slate-400">schedule</span>
+<span class="text-sm">11:00 AM – 12:30 PM (90 min)</span>
+</div>
+<div class="flex items-center gap-3 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-slate-400">location_on</span>
+<span class="text-sm font-semibold text-primary">Board Room 1, 4th Floor</span>
+</div>
+</div>
+</div>
+<!-- Participants -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-sm">Participants (8)</h4>
+<button class="text-primary text-sm font-semibold">Invite</button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200" data-alt="Meeting organizer avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOuUbduoO7d4AmiHDxEdUO4ViuarGh-sBM3xacBpwEwS9sR4nRhRxQ0Y7rTr5Mc0kW3HX5JTB6hRXWR7scA4PvJdSRbg_fAUI9Hyg7XWhMXizL_jd9PWDSCnpetR8Jg9qW2wnxrHufT5l7xEYat7T_Ybg5F4-AvJKhAMPaD9vB8X_yLeTi2wz9GzO3juK9eBBw33g2_QNTfv0kjaE4oUmUKnqfIH34u4Tw-O3-tr5R-qTLEHkNbf-8HjFJdopLqxHddj56br08nDPR')"></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium">Sarah Jenkins</span>
+<span class="text-xs text-slate-500">Organizer</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200" data-alt="Team member avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKbDipyNHaaJNKI1KopZln0p3MZIkM4BHVqSUiCuwg7uwViezRi2gDWZcmsj4g_InfGeX7XFGBSD79lw6QjGHGBrPeciMnhFlNUOAyOq9ZdrbwGWZyohedjQm9JNy2xsmYdxKqYULzoGrNf-Ybtc7_djanyoX947s_roCQr_nys7kQEjESgYmPRiAmpyvIQmIsSTYa5dBqihWEwC110Jv20lRXRqxz4_n4S1MK2y4lhqnrW-_FI86UWQhsWNgZ-iPo5dg_x3wLEftJ')"></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium">Michael Chen</span>
+<span class="text-xs text-slate-500">Product Manager</span>
+</div>
+</div>
+<div class="flex -space-x-2 pt-1">
+<div class="size-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-200" data-alt="Additional attendee avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkBJZyiLPGJ-CaEt-LoADqGAsBOZ7MFcifZLUOyQeyv_Mnw8ye8xnObyMMvsgrzq_yd2yQtA0jZnGe7UQ_br1jooTUWUF3o8cXUHib1PIr4YUmwcwyQ5eZ6_PA1z4uha9eL8Ja8MinzlgX_PveatGBhgmfWGIKJULcgSVt5p53HSXDspOxHudQfbMPzN1jKrGlO6MTT5xrNq691XnUJl_8po87MGF7Mls0Oti4FKtt4mJNMIS4udnw47MOR-bEQRPuh4A2zZ1gQef7')"></div>
+<div class="size-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-200" data-alt="Additional attendee avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqKKJWGNtIk7VerMwllK4bbvCKVTVmnTwhkRU7cz53OJU3yZdhqKmD_c7ow7LAB8X79HZt1DdQX6T8q5lcaLuXbLG7-U014QjlV7M0gVe_HX6V20LFj7M4KXZEGFYBLzeZajqfBePL9F0f01naZKsmDbzHKEc83YEgKsVeq3cT6Jb90LV2caA-WxqmWGeqkeZWn8Zp1C5vJ1v6Ma2zV5_hqLlvNCNsuIjGiKQwyjdn51vW7AGMUxgH2zFgVmEjctx6LwVwvkfjTvcw')"></div>
+<div class="size-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-200" data-alt="Additional attendee avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBPHEsL8Ah0ieVRl9vDRpch_Un7QWmOzgQEVKPizqkZYdtaIc_HMZKVZWS8DJBFAzg7xnpLI4URqcLgHyLlUSU2-HdGSJdLHzyUw8GOXyOhIc4BaeiOgwO997-KqYkxJHTIPnlrP38xcdJqrLfaOAxK_WkXi7YcW02ZxCAcAyAO7t6B3e9fF7JUA-tqQFZoM6q_-Pgct9QutMW0onq1B85hn84FEAFSPULhSllLEdDzh4-OQrBOELVExkc0fFadFi02oCLmfHCTDg-v')"></div>
+<div class="size-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-500">+3</div>
+</div>
+</div>
+</div>
+<!-- Facilities -->
+<div class="space-y-4">
+<h4 class="font-bold text-sm">Room Amenities</h4>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex items-center gap-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-slate-500" style="font-size: 18px;">tv</span>
+<span class="text-xs">85" 4K Display</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-slate-500" style="font-size: 18px;">videocam</span>
+<span class="text-xs">Poly Studio X50</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-slate-500" style="font-size: 18px;">draw</span>
+<span class="text-xs">Digital Whiteboard</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-slate-500" style="font-size: 18px;">coffee</span>
+<span class="text-xs">Refreshments</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20 space-y-3">
+<button class="w-full bg-primary text-white py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-all">
+                Edit Booking
+            </button>
+<button class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-red-500 py-3 rounded-lg font-bold text-sm hover:bg-red-50 dark:hover:bg-red-900/10 transition-all">
+                Cancel Meeting
+            </button>
+</div>
+</aside>
+</body></html>
